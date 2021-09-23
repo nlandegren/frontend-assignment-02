@@ -10,10 +10,40 @@
 </head>
 <body>
     <h1>Pixabay Image Search</h1>
-    
     <form>
         <label><input type="search" name ="q" placeholder="Search for photos"></label>
+    <select name="colors" id="">
+        <option value="any color">Any color</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="turquoise">Turquoise</option>
+        <option value="blue">Blue</option>
+        <option value="lilac">Lilac</option>
+        <option value="pink">Pink</option>
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="black">Black</option>
+        <option value="brown">Brown</option>
+    </select>
         <button type="submit">Submit</button>
     </form>
+    <div id="grid">
+        <div id="pic-1">abc</div>
+        <div id="pic-2">abc</div>
+        <div id="pic-3">abc</div>
+        <div id="pic-4">abc</div>
+        <div id="pic-5">abc</div>
+        <div id="pic-6">abc</div>
+        <div id="pic-7"></div>
+        <div id="pic-8"></div>
+        <div id="pic-9"></div>
+        <div id="pic-10"></div>
+    </div>
+    <div id="buttoncontainer">
+    <button type="submit" id="page">Previous page</button>
+    <button type="submit" id="page">Next page</button>
+    </div>
 </body>
 </html>

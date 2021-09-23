@@ -5,3 +5,59 @@ body {
     background-color: black;
     text-align: center;
 }
+
+#buttoncontainer {
+    display: none;
+}
+
+#grid {
+    display: grid;
+    grid-template-areas: 
+    "1 2 3 4" 1fr
+    "5 6 7 8" 1fr
+    "9 10 11 12" 1fr / 1fr 1fr 1fr 1fr;
+}
+#grid div {
+    border: thin red solid;
+    margin: 10px;
+}
+
+#pic-1 {
+    grid-area: 1;
+}
+
+#pic-2 {
+    grid-area: 2;
+}
+
+#pic-3 {
+    grid-area: 3;
+}
+
+#pic-4 {
+    grid-area: 4;
+}
+
+#pic-5 {
+    grid-area: 5;
+}
+
+#pic-6 {
+    grid-area: 6;
+}
+
+#pic-7 {
+    grid-area: 7;
+}
+
+#pic-8 {
+    grid-area: 8;
+}
+
+#pic-9 {
+    grid-area: 10;
+}
+
+#pic-10 {
+    grid-area: 11;
+}
