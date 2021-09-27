@@ -1,3 +1,4 @@
+
 body {
     background-image:url("photographer.jpg");
     background-repeat: no-repeat;
@@ -6,58 +7,69 @@ body {
     text-align: center;
 }
 
+input, select, button {
+    height: 2rem;
+    border: thin red solid;
+}
+
 #buttoncontainer {
     display: none;
 }
 
 #grid {
     display: grid;
-    grid-template-areas: 
-    "1 2 3 4" 1fr
-    "5 6 7 8" 1fr
-    "9 10 11 12" 1fr / 1fr 1fr 1fr 1fr;
+    grid-template:
+    "A B C D"
+    "E F G H"
+    "I J K L";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 #grid div {
     border: thin red solid;
     margin: 10px;
 }
 
+img {
+    max-width: 100%;
+}
+
 #pic-1 {
-    grid-area: 1;
+    grid-area: A;    
 }
 
 #pic-2 {
-    grid-area: 2;
+    grid-area: B;
 }
 
 #pic-3 {
-    grid-area: 3;
+    grid-area: C;
 }
 
 #pic-4 {
-    grid-area: 4;
+    grid-area: D;
 }
 
 #pic-5 {
-    grid-area: 5;
+    grid-area: E;
 }
 
 #pic-6 {
-    grid-area: 6;
+    grid-area: F;
 }
 
 #pic-7 {
-    grid-area: 7;
+    grid-area: G;
 }
 
 #pic-8 {
-    grid-area: 8;
+    grid-area: H;
 }
 
 #pic-9 {
-    grid-area: 10;
+    grid-area: J;
 }
 
 #pic-10 {
-    grid-area: 11;
+    grid-area: K;
 }
