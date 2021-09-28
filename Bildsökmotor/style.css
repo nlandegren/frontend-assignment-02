@@ -9,7 +9,6 @@ body {
 
 input, select, button {
     height: 2rem;
-    border: thin red solid;
 }
 
 #buttoncontainer {
@@ -18,58 +17,42 @@ input, select, button {
 
 #grid {
     display: grid;
-    grid-template:
-    "A B C D"
-    "E F G H"
-    "I J K L";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
-#grid div {
-    border: thin red solid;
+
+
+#grid figure {
     margin: 10px;
 }
 
+figcaption {
+    color: white;
+    font-size: 1.25em;
+}
+
 img {
-    max-width: 100%;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: none;
 }
 
-#pic-1 {
-    grid-area: A;    
+
+@media (max-width: 1200px){
+    #grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-#pic-2 {
-    grid-area: B;
+@media (max-width: 900px){
+    #grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-#pic-3 {
-    grid-area: C;
-}
-
-#pic-4 {
-    grid-area: D;
-}
-
-#pic-5 {
-    grid-area: E;
-}
-
-#pic-6 {
-    grid-area: F;
-}
-
-#pic-7 {
-    grid-area: G;
-}
-
-#pic-8 {
-    grid-area: H;
-}
-
-#pic-9 {
-    grid-area: J;
-}
-
-#pic-10 {
-    grid-area: K;
+@media (max-width: 600px){
+    #grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
