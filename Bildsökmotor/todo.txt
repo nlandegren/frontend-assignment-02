@@ -1,9 +1,0 @@
-HTML::
-
-Layout grid till bilderna
-knappar till previous och next page
-
-CSS::
-
-JAVASCRIPT::
-
