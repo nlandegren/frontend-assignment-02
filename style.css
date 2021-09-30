@@ -1,0 +1,58 @@
+
+body {
+    background-image:url("photographer.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    text-align: center;
+}
+
+input, select, button {
+    height: 2rem;
+}
+
+#buttoncontainer {
+    display: none;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+
+#grid figure {
+    margin: 10px;
+}
+
+figcaption {
+    color: white;
+    font-size: 1.25em;
+}
+
+img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: none;
+}
+
+
+@media (max-width: 1200px){
+    #grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px){
+    #grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px){
+    #grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
