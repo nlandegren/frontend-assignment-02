@@ -5,105 +5,53 @@ const figureCaptions = document.querySelectorAll('#grid figure figcaption')
 const previousPage = document.querySelector('#previous-page')
 const nextPage = document.querySelector('#next-page')
 
-let search;
-let color;
+let search, color;
+let params, limit, json;
 let pageNumber = 1;
-let params;
-let limit;
-let json;
 
 const form = document.querySelector('form');
 
 form.onsubmit = async event => {
     event.preventDefault();
-   
+    pageNumber = 1;
     search = form.elements.text.value;
     color = form.elements.colors.value;
 
-    params = new URLSearchParams({
-        key: apiKey,
-        q: search,
-        colors: color,
-        page: pageNumber,
-        per_page: 10
-    });
-    const response = await fetch('https://pixabay.com/api/?' + params.toString());
-    const json = await response.json();
-    limit = Object.keys(json.hits).length;
-    
+    json = await makeApiCall();
+
     document.getElementById("buttoncontainer").style.display = "block";
-    if (limit < 10) {
+    
+    if (json.totalHits <= pageNumber*10){
         nextPage.disabled = true;
     }
-
     previousPage.disabled = true;
-    pageNumber = 1;
-    for (let index = 0; index < figureCaptions.length; index++) {
-        figureCaptions[index].textContent = "";
-    }
-    for (let index = 0; index < limit; index++) {
-        pictureBoxes[index].style.display = "block";        
-        figureCaptions[index].textContent = "Tags: " + json.hits[index].tags;
-        figureCaptions[index].textContent += " User: " + json.hits[index].user;
-        pictureBoxes[index].src = json.hits[index].webformatURL;
-    }
+
+    displayImages();
 }
+
 
 nextPage.onclick = async event => {
     pageNumber++;
     previousPage.disabled = false;
 
-    params = new URLSearchParams({
-        key: apiKey,
-        q: search,
-        colors: color,
-        page: pageNumber,
-        per_page: 10
-    });
-    const response = await fetch('https://pixabay.com/api/?' + params.toString());
-    const json = await response.json();
-    limit = Object.keys(json.hits).length;
+    json = await makeApiCall();
 
-    if (limit < 10) {
+    if (json.totalHits <= pageNumber*10){
         nextPage.disabled = true;
     }
-    for (let index = 0; index < figureCaptions.length; index++) {
-        figureCaptions[index].textContent = "";
-    }
+
+    // Hide figure elements that are empty but show ugly border.
     for (let index = 0; index < pictureBoxes.length; index++) {
         pictureBoxes[index].style.display = "none";
     }
-    for (let index = 0; index < limit; index++) {
-        pictureBoxes[index].style.display = "block";        
-        figureCaptions[index].textContent = "Tags: " + json.hits[index].tags;
-        figureCaptions[index].textContent += " User: " + json.hits[index].user;
-        pictureBoxes[index].src = json.hits[index].webformatURL;
-    }
+    displayImages();
 }
+
 
 previousPage.onclick = async event => {
     pageNumber--;
-
-    params = new URLSearchParams({
-        key: apiKey,
-        q: search,
-        colors: color,
-        page: pageNumber,
-        per_page: 10
-    });
-    const response = await fetch('https://pixabay.com/api/?' + params.toString());
-    const json = await response.json();
-    limit = Object.keys(json.hits).length;
-    for (let index = 0; index < figureCaptions.length; index++) {
-        figureCaptions[index].textContent = "";
-    }
-    for (let index = 0; index < limit; index++) {
-        pictureBoxes[index].style.display = "block";        
-        figureCaptions[index].textContent = "Tags: " + json.hits[index].tags;
-        figureCaptions[index].textContent += " User: " + json.hits[index].user;
-        pictureBoxes[index].src = json.hits[index].webformatURL;
-    }
-
+    json = await makeApiCall();
+    displayImages();
     if (pageNumber === 1) {
         previousPage.disabled = true;
     }
@@ -111,24 +59,30 @@ previousPage.onclick = async event => {
 }
 
 
-// function displayImages(){
-//     for (let index = 0; index < limit; index++) {
-//         pictureBoxes[index].src = "";
-//         pictureBoxes[index].src = json.hits[index].previewURL;
-//     }
-// }
+function displayImages(){
+    // Remove old figure captions.
+    for (let index = 0; index < figureCaptions.length; index++) {
+        figureCaptions[index].textContent = "";
+    }
+    for (let index = 0; index < limit; index++) {
+        pictureBoxes[index].style.display = "block";        
+        figureCaptions[index].textContent = "Tags: " + json.hits[index].tags;
+        figureCaptions[index].textContent += " User: " + json.hits[index].user;
+        pictureBoxes[index].src = json.hits[index].webformatURL;
+    }
+}
 
-// async function makeApiCall(){
-//     params = new URLSearchParams({
-//         key: apiKey,
-//         q: search,
-//         colors: color,
-//         page: pageNumber,
-//         per_page: 10
-//     });
-//     const response = await fetch('https://pixabay.com/api/?' + params.toString());
-//     const json = await response.json();
-//     limit = Object.keys(json.hits).length;
-//     return json;
-// }
+async function makeApiCall(){
+    params = new URLSearchParams({
+        key: apiKey,
+        q: search,
+        colors: color,
+        page: pageNumber,
+        per_page: 10
+    });
+    const response = await fetch('https://pixabay.com/api/?' + params.toString());
+    const json = await response.json();
+    limit = Object.keys(json.hits).length;
+    return json;
+}
 
